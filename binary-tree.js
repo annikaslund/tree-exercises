@@ -22,7 +22,7 @@ class BinaryTree {
     let queue = [this.root]
     let min = 0;
 
-    while (queue.length){
+    while (queue.length) {
       let currNode = queue.shift();
 
       min += 1;
@@ -39,7 +39,32 @@ class BinaryTree {
    * the length of the longest path from the root to a leaf. */
 
   maxDepth() {
+    if (this.root === null) return 0;
 
+    let stack = [this.root];
+    let currMax = 0;
+    let max = 0;
+
+    while (stack.length) {
+      let currNode = stack.pop();
+      
+      if (this.root.right === currNode || this.root.left === currNode) {
+        currMax = 2;
+      } else {
+        currMax += 1;
+      }
+
+      if (currMax > max) {
+        max = currMax;
+      }
+
+      if (currNode.left === null && currNode.right === null) currMax -= 1;
+      if (currNode.left) stack.push(currNode.left);
+      if (currNode.right) stack.push(currNode.right);
+
+    }
+
+    return max;
   }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
@@ -83,7 +108,7 @@ class BinaryTree {
    * of two nodes in a binary tree. */
 
   lowestCommonAncestor(node1, node2) {
-    
+
   }
 }
 
