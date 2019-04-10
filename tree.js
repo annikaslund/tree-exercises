@@ -37,15 +37,15 @@ class Tree {
 
   countEvens() {
     let stack = [this.root];
-    let total = 0;
+    let count = 0;
 
-    if (this.root === null) return total;
+    if (this.root === null) return count;
 
     while (stack.length){
       let currNode = stack.pop();
 
       if (currNode.val % 2 === 0){
-        total += 1;
+        count += 1;
       }
 
       for (let child of currNode.children){
@@ -53,14 +53,31 @@ class Tree {
       }
     }
 
-    return total;
+    return count;
   }
 
   /** numGreater(lowerBound): return a count of the number of nodes
    * whose value is greater than lowerBound. */
 
   numGreater(lowerBound) {
+    let stack = [this.root];
+    let count = 0;
 
+    if (this.root === null) return count;
+
+    while (stack.length){
+      let currNode = stack.pop();
+
+      if (currNode.val > lowerBound){
+        count += 1;
+      }
+
+      for (let child of currNode.children){
+        stack.push(child);
+      }
+    }
+
+    return count;
   }
 }
 
